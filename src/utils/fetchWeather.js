@@ -10,7 +10,7 @@ async function fetchWeatherData(latitude, longitude, callback) {
     } else {
       callback(
         undefined,
-        `It is currently ${res.data.current["temperature"]} degrees out. There is ${res.data.current["precip"]}% chance of raining..`
+        `It is currently ${res.data.current["temperature"]} degrees out but it's feels like ${res.data.current["feelslike"]} degrees out.There is ${res.data.current["humidity"]}% humidity and ${res.data.current["precip"]}% chance of raining . Localtime is ${res.data.location["localtime"]}`
       );
     }
   } catch (error) {
