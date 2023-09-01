@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,19 +8,23 @@
     <link rel="stylesheet" href="/css/style.css">
     <title>Weather App</title>
 </head>
-<body>
-    <div class="main-content">
-        {{>header}}
-        <p>Use this to get weather details</p>
-        <form action="" method="">
-            <input type="text" placeholder="location">
-            <button>Search Data</button>
-        </form>
 
-        <p id="m1"></p>
-        <p id="m2"></p>
-    </div>
+<body>
+    <div class="container">
+        <div class="main-content">
+            {{>header}}
+            <p>Use this to get weather details</p>
+            <form action="" method="">
+                <input type="text" placeholder="location">
+                <button>Search Data</button>
+            </form>
+
+            <p id="m1"></p>
+            <p id="m2"></p>
+        </div>  
     {{>footer}}
+    </div>
     <script src="/js/main.js"></script>
 </body>
+
 </html>
