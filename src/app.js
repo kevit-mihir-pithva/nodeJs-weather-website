@@ -70,6 +70,23 @@ app.get("/weather",(req,res)=>{
     })
 })
 
+app.get("/curentLocationWeather",(req,res)=>{
+    if(!req.query.latitude || !req.query.longitude){
+        return res.send({
+            error:"You must provide latitude and longitude in url..."
+        })
+    }
+    fetchWeather(req.query.latitude,req.query.longitude,(error,location)=>{
+        if(error){
+            return res.send({
+                error
+            })
+        }
+        res.send({
+            location
+        })
+    })
+})
 
 
 app.get("/help/*",(req,res)=>{

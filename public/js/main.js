@@ -20,3 +20,27 @@ weatherForm.addEventListener("submit", (e) => {
     });
   });
 });
+
+
+document.querySelector("#current-location").addEventListener("click" , () => {
+  if (!navigator.geolocation) {
+    alert("Your browser not supports geolocation :(")
+  }
+  navigator.geolocation.getCurrentPosition((position) => {
+    const location = {
+      latitude:position.coords.latitude,
+      longitude:position.coords.longitude
+    }
+    messageOne.textContent="loading.."
+    messageTwo.textContent=""
+  fetch(`/curentLocationWeather?latitude=${location.latitude}&longitude=${location.longitude}`).then((res) => {
+    res.json().then((data) => {
+      if (data.error) {
+        messageOne.textContent=data.error
+      } else {
+        messageOne.textContent=data.location
+      }
+    });
+  });
+  })
+})
