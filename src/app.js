@@ -106,5 +106,5 @@ app.get("*",(req,res)=>{
 })
 
 app.listen(3000,()=>{
-    console.log("Servern is on!!!");
+    console.log("Server is on!!!");
 })
