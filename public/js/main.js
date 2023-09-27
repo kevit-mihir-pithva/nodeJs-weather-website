@@ -38,7 +38,7 @@ document.querySelector("#current-location").addEventListener("click" , () => {
       if (data.error) {
         messageOne.textContent=data.error
       } else {
-        messageOne.textContent=data.location
+        messageOne.textContent=data.forcast
       }
     });
   });

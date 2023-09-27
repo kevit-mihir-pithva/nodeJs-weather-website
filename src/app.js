@@ -39,52 +39,42 @@ app.get("/help",(req,res)=>{
     })
 })
 
-app.get("/weather",(req,res)=>{
+app.get("/weather",async(req,res)=>{
     if(!req.query.address){
         return res.send({
             error:"You must provide address in url..."
         })
     }
-    fetchCordinates(req.query.address,(error,{latitude,longitude,location}={}) => {
-        if(error){
-            return res.send({
-                error
-            })
-        }
-        fetchWeather(latitude,longitude,(error,weatherData)=>{
-            if(error){
-                return res.send({
-                    error
-                })
-            }
-            else{
-                res.send({
-                    address:req.query.address,
-                    location,
-                    forcast:weatherData,
-                })
-            }
-        })
-        
+    const {latitude , longitude , location ,invalidError} = await fetchCordinates(req.query.address)
+    if(invalidError){
+        return res.send(invalidError)
+    }
+    const {data,error} = await fetchWeather(latitude,longitude)
+    if (error) {
+        return res.send(error)
+    }
+    res.send({
+        forcast:data,
+        location,
+        address: req.query.address
     })
+
 })
 
-app.get("/curentLocationWeather",(req,res)=>{
+app.get("/curentLocationWeather",async (req,res)=>{
     if(!req.query.latitude || !req.query.longitude){
         return res.send({
             error:"You must provide latitude and longitude in url..."
         })
     }
-    fetchWeather(req.query.latitude,req.query.longitude,(error,location)=>{
-        if(error){
-            return res.send({
-                error
-            })
-        }
-        res.send({
-            location
-        })
+    const {data,error} = await fetchWeather(req.query.latitude,req.query.longitude)
+    if (error) {
+        return res.send(error)
+    }
+    res.send({
+        forcast:data
     })
+
 })
 
 
