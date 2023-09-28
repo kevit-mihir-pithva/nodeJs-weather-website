@@ -47,11 +47,11 @@ app.get("/weather",async(req,res)=>{
     }
     const {latitude , longitude , location ,invalidError} = await fetchCordinates(req.query.address)
     if(invalidError){
-        return res.send(invalidError)
+        return res.send({error:invalidError})
     }
     const {data,error} = await fetchWeather(latitude,longitude)
     if (error) {
-        return res.send(error)
+        return res.send({error:error})
     }
     res.send({
         forcast:data,
@@ -69,7 +69,7 @@ app.get("/curentLocationWeather",async (req,res)=>{
     }
     const {data,error} = await fetchWeather(req.query.latitude,req.query.longitude)
     if (error) {
-        return res.send(error)
+        return res.send({error:error})
     }
     res.send({
         forcast:data
